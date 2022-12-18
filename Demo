@@ -1,0 +1,38 @@
+%Newton Raphson method(Iteration criteria)
+clear all;
+clc;
+f=inline('exp(x)*cos(x)-1.2');
+df=inline('exp(x)*(cos(x)-sin(x))');
+ddf=inline('-2*exp(x)*sin(x)');
+x1=input('Enter initial guess:');
+n=input('Enter no. of Iterations:');
+y1=f(x1);
+y2=df(x1);
+y3=ddf(x1);
+while(abs((y1*y3)/(y2*y2))>1)
+    x1=input('Enter initial guess again:');
+    y1=f(x1);
+    y2=df(x1);
+    y3=ddf(x1);
+end
+%x2=x1-y1/y2;
+%fprintf('Iteration=%0.4f\n',x2);
+for i=1:n
+  x2=x1-y1/y2;
+    x1=x2;
+    y1=f(x1);
+    y2=df(x1);
+    fprintf('Iteration=%0.4f\n',x2);
+end
+fprintf('\nThe root of given equation is %f\n',x2);
+  
+  Output: 
+Enter initial guess:4
+Enter no. of Iterations:5
+Enter initial guess again:2
+Iteration=1.5635
+Iteration=1.3177
+Iteration=1.2189
+Iteration=1.2021
+Iteration=1.2016
+The root of given equation is 1.201619
